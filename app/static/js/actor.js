@@ -58,8 +58,30 @@ function getBlocking() {
 
 
 
+	const url = '/script' + '/' + scriptNumber
 
-
+	// A 'fetch' AJAX call to the server.
+    fetch(url)
+    	.then((res) => { 
+    		//// Do not write any code here
+	        return res.json()
+	        //// Do not write any code here
+	    })
+	    .then((jsonResult) => {
+	    	// This is where the JSON result (jsonResult) from the server can be accessed and used.
+	        console.log('Result:', jsonResult)
+			// Use the JSON to add a script part
+			for(let k = 0; k < jsonResult.length; k++) {
+				if (jsonResult[k][4][parseInt(actorNumber)] != undefined) {
+					addScriptPart(jsonResult[k][0], jsonResult[k][1], jsonResult[k][2], jsonResult[k][4][parseInt(actorNumber)][1])
+				}
+				
+			}
+	    }).catch((error) => {
+	    	// if an error occured it will be logged to the JavaScript console here.
+	        console.log("An error occured with fetch:", error)
+		})
+	
 
 
 }

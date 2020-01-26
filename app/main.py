@@ -34,7 +34,23 @@ parse the text files and send the correct JSON.'''
 @app.route('/script/<int:script_id>')
 def script(script_id):
     # right now, just sends the script id in the URL
-    return jsonify(script_id)
+    data = read_text(str(script_id))
+    actor_data = read_csv("actors.csv")
+    actor = ""
+    result = []
+
+
+
+    for i in range(2, len(data)):
+        j = i - 2 + 1
+        actors={}
+        for k in actor_data.keys():
+            actor = actor_data[k]
+            if actor in data[j].keys():
+                actors[k] = [actor, data[j][actor]]
+        result.append([data["script"], data[j]['chart_start'], data[j]['chart_end'], data["script"][int(data[j]['chart_start']):int(data[j]['chart_end'])], actors])
+   
+    return jsonify(result)
 
 
 ## POST route for replacing script blocking on server
@@ -45,6 +61,49 @@ def script(script_id):
 def addBlocking():
     # right now, just sends the original request json
     return jsonify(request.json)
+
+
+
+# added, helper function for file processing
+def read_text(filenum):
+    with open('/app/script_data/hamlet'+filenum+'.txt') as script:
+        blank = 0
+        data = {}
+        line = script.readline()
+        data["file_number"] = line.strip()
+        while line:
+            if line == "\n":
+                blank += 1
+            elif blank == 1:
+                data["script"] = line.strip()
+            elif blank == 2:
+                comma_spt = line.split(",")
+ 
+                dot_spt=comma_spt[0].split(".")
+                part_number = int(dot_spt[0].strip())
+                data[part_number] = {}
+                data[part_number]["chart_start"] = dot_spt[1].strip()
+                data[part_number]["chart_end"] = comma_spt[1].strip()
+                
+                for i in range (2 , len(comma_spt)):
+                    #data[i-2]["actor"] =  comma_spt[i].split("-")[0].strip()
+                    #data[i-2]["position"] = comma_spt[i].split("-")[1].strip()
+                    data[part_number][comma_spt[i].split("-")[0].strip()]=comma_spt[i].split("-")[1].strip()
+            line = script.readline()
+  
+    return data
+# added, help function for file processing
+
+import csv
+def read_csv(filename):
+    #'actors.csv'
+    with open("/app/"+filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        actor = {}
+        for row in csv_reader:
+           actor[int(row[0])]=row[1]
+    return actor
+
 
 
 
