@@ -71,15 +71,16 @@ function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 
 // Adding example script blocking 
 // (the blocks should be removed from the screen when getting a script from the server)
-addBlockToScreen(`That's it Claudius, I'm leaving!Fine! Oh..he left already..`, 0, 31, ['Hamlet', 'Claudius'], [5, 2])
-addBlockToScreen(`That's it Claudius, I'm leaving!Fine! Oh..he left already..`, 32, 58, ['Hamlet', 'Claudius'], ['', 3])
-setScriptNumber('example')
+// addBlockToScreen(`That's it Claudius, I'm leaving!Fine! Oh..he left already..`, 0, 31, ['Hamlet', 'Claudius'], [5, 2])
+// addBlockToScreen(`That's it Claudius, I'm leaving!Fine! Oh..he left already..`, 32, 58, ['Hamlet', 'Claudius'], ['', 3])
+// setScriptNumber('example')
 
 //////////////
 // The two functions below should make calls to the server
 // You will have to edit these functions.
 
 function getBlocking() {
+	removeAllBlocks();
 	const scriptNumber = scriptNumText.value;
 	setScriptNumber(scriptNumber)
 	console.log(`Get blocking for script number ${scriptNumber}`)
@@ -88,6 +89,38 @@ function getBlocking() {
 	/// Make a GET call (using fetch()) to get your script and blocking info from the server,
 	// and use the functions above to add the elements to the browser window.
 	// (similar to actor.js)
+
+
+	const url = '/script' + '/' + scriptNumber
+
+	// A 'fetch' AJAX call to the server.
+    fetch(url)
+    	.then((res) => { 
+    		//// Do not write any code here
+	        return res.json()
+	        //// Do not write any code here
+	    })
+	    .then((jsonResult) => {
+	    	// This is where the JSON result (jsonResult) from the server can be accessed and used.
+	        console.log('Result:', jsonResult)
+			// Use the JSON to add a script part
+			// We are going to visit every part of the script. ASSUME that the part number is consecutive.
+			for(let k = 0; k < jsonResult.length; k++) {
+				let script = jsonResult[k];
+				let blockingInfo = script[3];
+				let listOfActorNames = [];
+				let listofActorPositions = [];
+				for(let index in blockingInfo) {
+					listOfActorNames.push(blockingInfo[index][0]);
+					listofActorPositions.push(blockingInfo[index][1]);
+				  }
+				addBlockToScreen(script[0], parseInt(script[1]), parseInt(script[2]), listOfActorNames, listofActorPositions)
+				
+			}
+	    }).catch((error) => {
+	    	// if an error occured it will be logged to the JavaScript console here.
+	        console.log("An error occured with fetch:", error)
+		})
 
 }
 
@@ -100,11 +133,9 @@ function changeScript() {
     // The data we are going to send in our request
     // It is a Javascript Object that will be converted to JSON
     let data = {
-    	scriptNum: getScriptNumber()
-    	// What else do you need to send to the server?    
-
-
-
+    	scriptNum: getScriptNumber(),
+		// What else do you need to send to the server?    
+		blocks: getBlockingDetailsOnScreen()
     }
 
     // Create the request constructor with all the parameters we need

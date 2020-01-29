@@ -72,8 +72,8 @@ function getBlocking() {
 	        console.log('Result:', jsonResult)
 			// Use the JSON to add a script part
 			for(let k = 0; k < jsonResult.length; k++) {
-				if (jsonResult[k][4][parseInt(actorNumber)] != undefined) {
-					addScriptPart(jsonResult[k][0], jsonResult[k][1], jsonResult[k][2], jsonResult[k][4][parseInt(actorNumber)][1])
+				if (jsonResult[k][3][parseInt(actorNumber)] != undefined) {
+					addScriptPart(jsonResult[k][0], parseInt(jsonResult[k][1]), parseInt(jsonResult[k][2]), jsonResult[k][3][parseInt(actorNumber)][1])
 				}
 				
 			}

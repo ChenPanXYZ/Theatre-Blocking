@@ -39,8 +39,6 @@ def script(script_id):
     actor = ""
     result = []
 
-
-
     for i in range(2, len(data)):
         j = i - 2 + 1
         actors={}
@@ -48,7 +46,7 @@ def script(script_id):
             actor = actor_data[k]
             if actor in data[j].keys():
                 actors[k] = [actor, data[j][actor]]
-        result.append([data["script"], data[j]['chart_start'], data[j]['chart_end'], data["script"][int(data[j]['chart_start']):int(data[j]['chart_end'])], actors])
+        result.append([data["script"], data[j]['chart_start'], data[j]['chart_end'], actors])
    
     return jsonify(result)
 
@@ -60,42 +58,92 @@ def script(script_id):
 @app.route('/script', methods=['POST'])
 def addBlocking():
     # right now, just sends the original request json
+
+    data = request.get_json()
+    filenum = data['scriptNum']
+    blocks = data['blocks']
+
+    filename = find_script(filenum)
+    if filename is not None:
+
+        with open("/app/script_data/" + filename, "w") as f:
+            f.write(filenum + '\n\n')
+            # Need to get FULL Script first.
+            fullScript = ""
+            for i in range(0, len(blocks)):
+                rowBlockText = blocks[i]['text'] # We don't want "     "
+                fullScript+= rowBlockText[1: len(rowBlockText) - 1]
+            f.write(fullScript+ '\n\n')
+            start = 0
+            end = 0
+            for i in range(0, len(blocks)):
+                part_num = blocks[i]['part']
+                rowBlockText = blocks[i]['text'] # We don't want "     "
+                end += len(rowBlockText) - 2
+                actors = blocks[i]['actors']
+                f.write(str(part_num)+'. '+str(start)+', '+str(end - 1)+', ')
+                for actor_index in range(0, len(actors)):
+                    actor = actors[actor_index]
+                    f.write(actor[0]+'-'+actor[1])
+                    if actor_index != (len(actors) - 1):
+                        f.write(', ')
+                    else:
+                        f.write('\n')
+                start = end
+            f.close()
     return jsonify(request.json)
 
 
 
 # added, helper function for file processing
+def find_script(filenum):
+    ''' Helper function used to get file names of the text files with the file number
+    @param str filenum: a filenum indicating the script number
+    '''
+    for filename in os.listdir('app/script_data/'):
+        with open('app/script_data/'+filename, "r") as script:
+            if script.readline().strip('\n') == filenum:
+                return filename
+    return None
+
 def read_text(filenum):
-    with open('/app/script_data/hamlet'+filenum+'.txt') as script:
-        blank = 0
-        data = {}
-        line = script.readline()
-        data["file_number"] = line.strip()
-        while line:
-            if line == "\n":
-                blank += 1
-            elif blank == 1:
-                data["script"] = line.strip()
-            elif blank == 2:
-                comma_spt = line.split(",")
- 
-                dot_spt=comma_spt[0].split(".")
-                part_number = int(dot_spt[0].strip())
-                data[part_number] = {}
-                data[part_number]["chart_start"] = dot_spt[1].strip()
-                data[part_number]["chart_end"] = comma_spt[1].strip()
-                
-                for i in range (2 , len(comma_spt)):
-                    #data[i-2]["actor"] =  comma_spt[i].split("-")[0].strip()
-                    #data[i-2]["position"] = comma_spt[i].split("-")[1].strip()
-                    data[part_number][comma_spt[i].split("-")[0].strip()]=comma_spt[i].split("-")[1].strip()
+    ''' Helper function used to read information from the provided text files with the file number
+    @param str filenum: a filenum indicating the script number
+    '''
+    data = {}
+    filename = find_script(filenum)
+    if filename is not None:
+        with open('/app/script_data/'+filename, "r") as script:
+            blank = 0
+            data = {}
             line = script.readline()
+            data["file_number"] = line.strip()
+            while line:
+                if line == "\n":
+                    blank += 1
+                elif blank == 1:
+                    data["script"] = line.strip()
+                elif blank == 2:
+                    comma_spt = line.split(",")
+    
+                    dot_spt=comma_spt[0].split(".")
+                    part_number = int(dot_spt[0].strip())
+                    data[part_number] = {}
+                    data[part_number]["chart_start"] = dot_spt[1].strip()
+                    data[part_number]["chart_end"] = comma_spt[1].strip()
+                    
+                    for i in range (2 , len(comma_spt)):
+                        data[part_number][comma_spt[i].split("-")[0].strip()]=comma_spt[i].split("-")[1].strip()
+                line = script.readline()
   
     return data
 # added, help function for file processing
 
 import csv
 def read_csv(filename):
+    '''Helper function used to read actor names from the csv file
+    @param str filename: the name of the csv file
+    '''
     #'actors.csv'
     with open("/app/"+filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
