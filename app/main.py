@@ -109,7 +109,7 @@ def addActor():
 
     filename = find_script(filenum)
     if filename is not None:
-
+        add_name_csv(newActor, 'actors.csv')
         with open("/app/script_data/" + filename, "w") as f:
             f.write(filenum + '\n\n')
             # Need to get FULL Script first.
@@ -195,6 +195,17 @@ def read_csv(filename):
         for row in csv_reader:
            actor[int(row[0])]=row[1]
     return actor
+    
+def add_name_csv(actor_name,file_name):
+    with open("/app/" + file_name,"r+") as csv_file:
+        exist = False
+        for line in csv_file:
+            if line.split(",")[1].strip() == actor_name:
+                exist = True
+            last_num = line.split(",")[0].strip()
+        if not exist:
+            csv_file.write(str(int(last_num)+1)+","+actor_name+"\n")
+
 
 
 

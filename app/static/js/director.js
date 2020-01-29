@@ -83,9 +83,6 @@ function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 // The two functions below should make calls to the server
 // You will have to edit these functions.
 
-function addActor() {
-	
-}
 function getBlocking() {
 	removeAllBlocks();
 	const scriptNumber = scriptNumText.value;
@@ -181,6 +178,10 @@ function addActor() {
 	// You can make a POST call with all of the 
 	// blocking data to save it on the server
 
+	if(document.getElementById("actorName").value === "") {
+		alert("Please input a valid Actor Name!")
+		return
+	}
 	const url = '/actor';
 
     // The data we are going to send in our request
@@ -190,7 +191,8 @@ function addActor() {
 		// What else do you need to send to the server?    
 		blocks: getBlockingDetailsOnScreen(),
 		newActor: document.getElementById("actorName").value
-    }
+	}
+	
 
     // Create the request constructor with all the parameters we need
     const request = new Request(url, {
@@ -209,7 +211,8 @@ function addActor() {
     		// Logs success if server accepted the request
     		//   You should still check to make sure the blocking was saved properly
     		//   to the text files on the server.
-    		console.log('Success') 
+			console.log('Success')
+			getBlocking()
 	        return res.json()
 	        ////
 	    })
