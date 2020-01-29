@@ -43,6 +43,10 @@ function getScriptNumber(num) {
 	return document.querySelector('#scriptNum').innerHTML
 }
 
+// function getNewActor(num) {
+// 	return document.querySelector('#scriptNum').innerHTML
+// }
+
 /* Function to add the blocking parts to browser window */
 function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 
@@ -79,6 +83,9 @@ function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 // The two functions below should make calls to the server
 // You will have to edit these functions.
 
+function addActor() {
+	
+}
 function getBlocking() {
 	removeAllBlocks();
 	const scriptNumber = scriptNumText.value;
@@ -170,3 +177,48 @@ function changeScript() {
 }
 
 
+function addActor() {
+	// You can make a POST call with all of the 
+	// blocking data to save it on the server
+
+	const url = '/actor';
+
+    // The data we are going to send in our request
+    // It is a Javascript Object that will be converted to JSON
+    let data = {
+    	scriptNum: getScriptNumber(),
+		// What else do you need to send to the server?    
+		blocks: getBlockingDetailsOnScreen(),
+		newActor: document.getElementById("actorName").value
+    }
+
+    // Create the request constructor with all the parameters we need
+    const request = new Request(url, {
+        method: 'post', 
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+    });
+
+    // Send the request
+    fetch(request)
+    	.then((res) => { 
+    		//// Do not write any code here
+    		// Logs success if server accepted the request
+    		//   You should still check to make sure the blocking was saved properly
+    		//   to the text files on the server.
+    		console.log('Success') 
+	        return res.json()
+	        ////
+	    })
+	    .then((jsonResult) => {
+	    	// Although this is a post request, sometimes you might return JSON as well
+	        console.log('Result:', jsonResult)
+
+	    }).catch((error) => {
+	    	// if an error occured it will be logged to the JavaScript console here.
+	        console.log("An error occured with fetch:", error)
+	    })
+}

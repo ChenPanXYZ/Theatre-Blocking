@@ -94,6 +94,50 @@ def addBlocking():
     return jsonify(request.json)
 
 
+## POST route for replacing script blocking on server
+# Note: For the purposes of this assignment, we are using POST to replace an entire script.
+# Other systems might use different http verbs like PUT or PATCH to replace only part
+# of the script.
+@app.route('/actor', methods=['POST'])
+def addActor():
+    # right now, just sends the original request json
+
+    data = request.get_json()
+    filenum = data['scriptNum']
+    blocks = data['blocks']
+    newActor = data['newActor']
+
+    filename = find_script(filenum)
+    if filename is not None:
+
+        with open("/app/script_data/" + filename, "w") as f:
+            f.write(filenum + '\n\n')
+            # Need to get FULL Script first.
+            fullScript = ""
+            for i in range(0, len(blocks)):
+                rowBlockText = blocks[i]['text'] # We don't want "     "
+                fullScript+= rowBlockText[1: len(rowBlockText) - 1]
+            f.write(fullScript+ '\n\n')
+            start = 0
+            end = 0
+            for i in range(0, len(blocks)):
+                part_num = blocks[i]['part']
+                rowBlockText = blocks[i]['text'] # We don't want "     "
+                end += len(rowBlockText) - 2
+                actors = blocks[i]['actors']
+                f.write(str(part_num)+'. '+str(start)+', '+str(end - 1)+', ')
+                for actor_index in range(0, len(actors)):
+                    actor = actors[actor_index]
+                    f.write(actor[0]+'-'+actor[1])
+                    if actor_index != (len(actors) - 1):
+                        f.write(', ')
+                    else:
+                        f.write(', ' + newActor + '-' + '0\n')
+                start = end
+            f.close()
+    return jsonify(request.json)
+
+
 
 # added, helper function for file processing
 def find_script(filenum):
@@ -144,7 +188,7 @@ def read_csv(filename):
     '''Helper function used to read actor names from the csv file
     @param str filename: the name of the csv file
     '''
-    #'actors.csv'
+
     with open("/app/"+filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         actor = {}

@@ -34,10 +34,15 @@
         <h3 class="text-muted">Director View</h3>
       </div>
 
-
-      <input id='scriptNumText' type="text" name="" placeholder="Script number">
-      <button class="btn btn-sm btn-info" onclick="getBlocking()" role="button">Get Script Blocking</button>
-      <button class="btn btn-sm btn-success" onclick="changeScript()" role="button">Save Script Blocking</button>
+      <div class = "scriptChange">
+        <input id='scriptNumText' type="text" name="" placeholder="Script number">
+        <button class="btn btn-sm btn-info" onclick="getBlocking()" role="button">Get Script Blocking</button>
+        <button class="btn btn-sm btn-success" onclick="changeScript()" role="button">Save Script Blocking</button>
+      </div>
+        <div class = "actorChange">
+        <input id='actorName' type="text" name="" placeholder="Actor Name">
+        <button class="btn btn-sm btn-success" onclick="addActor()" role="button">Add Actor</button>
+      </div>
 
       <p>Modifying blocking for script number: <span id='scriptNum' style='font-style: italic;'></span></p>
 
