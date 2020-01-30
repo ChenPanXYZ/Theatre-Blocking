@@ -1,7 +1,7 @@
 /* director.js - Theatre blocking JavaScript */
 "use strict";
 console.log('director.js') // log to the JavaScript console.
-
+var blockShown = false;
 /* UI functions below - DO NOT change them */
 
 // Function to remove all blocking parts from current window
@@ -43,10 +43,6 @@ function getScriptNumber(num) {
 	return document.querySelector('#scriptNum').innerHTML
 }
 
-// function getNewActor(num) {
-// 	return document.querySelector('#scriptNum').innerHTML
-// }
-
 /* Function to add the blocking parts to browser window */
 function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 
@@ -84,6 +80,10 @@ function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 // You will have to edit these functions.
 
 function getBlocking() {
+	if(document.getElementById("scriptNumText").value === "") {
+		alert("Please input a valid Script Number!")
+		return
+	}
 	removeAllBlocks();
 	const scriptNumber = scriptNumText.value;
 	setScriptNumber(scriptNumber)
@@ -119,8 +119,9 @@ function getBlocking() {
 					listofActorPositions.push(blockingInfo[index][1]);
 				  }
 				addBlockToScreen(script[0], parseInt(script[1]), parseInt(script[2]), listOfActorNames, listofActorPositions)
-				
 			}
+
+			blockShown = true;
 	    }).catch((error) => {
 	    	// if an error occured it will be logged to the JavaScript console here.
 	        console.log("An error occured with fetch:", error)
@@ -131,6 +132,22 @@ function getBlocking() {
 function changeScript() {
 	// You can make a POST call with all of the 
 	// blocking data to save it on the server
+
+	if(blockShown != true) {
+		alert("Please input a Get the Script Blocking first!")
+		return
+	}
+
+	var elements = document.querySelectorAll('[id=scriptText]');
+
+	for (var i = 0; i < elements.length; i++) {
+		let element = elements[i]
+		if (parseInt(element.value) < 0 || parseInt(element.value) > 8) {
+			alert("Only 0 - 8 is accepted!")
+			return
+		}
+	}
+
 
 	const url = '/script';
 
@@ -180,6 +197,11 @@ function changeActor(option) {
 
 	if(document.getElementById("actorName").value === "") {
 		alert("Please input a valid Actor Name!")
+		return
+	}
+
+	if (blockShown != true) {
+		alert("Please Get Script Blocking")
 		return
 	}
 	const url = '/actor';

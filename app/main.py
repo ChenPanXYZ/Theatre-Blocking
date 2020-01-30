@@ -229,10 +229,6 @@ def add_name_csv(actor_name,file_name):
         if not exist:
             csv_file.write(str(int(last_num)+1)+","+actor_name+"\n")
 
-
-
-
-
 if __name__ == "__main__":
     # Only for debugging while developing
     app.run(host='0.0.0.0', debug=True, port=os.environ.get('PORT', 80))
