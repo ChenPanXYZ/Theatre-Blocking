@@ -60,7 +60,7 @@ Write your documentation here.
 2. Allow director to delete existing actors from the blocking stage. If the actor provided cannot be found in any of the script, the action won't be proceed.
 
 # JSON file
-1. Example of ##script_get_data.json##
+1. Example of **script_get_data.json**
 ```
 [ 
   [ 
@@ -138,7 +138,7 @@ Write your documentation here.
   ]
 ]
 ```
-2. Example of ##script_post_data.json##
+2. Example of **script_post_data.json**
 { 
     "scriptNum":"3",
     "blocks":[ 
