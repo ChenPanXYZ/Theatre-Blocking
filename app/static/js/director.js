@@ -174,7 +174,7 @@ function changeScript() {
 }
 
 
-function addActor() {
+function changeActor(option) {
 	// You can make a POST call with all of the 
 	// blocking data to save it on the server
 
@@ -190,7 +190,8 @@ function addActor() {
     	scriptNum: getScriptNumber(),
 		// What else do you need to send to the server?    
 		blocks: getBlockingDetailsOnScreen(),
-		newActor: document.getElementById("actorName").value
+		newActor: document.getElementById("actorName").value,
+		type: option
 	}
 	
 

@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import os
+import os, csv
 
 # Start the app and setup the static directory for the html, css, and js files.
 app = Flask(__name__, static_url_path='', static_folder='static')
@@ -99,24 +99,33 @@ def addBlocking():
 # Other systems might use different http verbs like PUT or PATCH to replace only part
 # of the script.
 @app.route('/actor', methods=['POST'])
-def addActor():
+# def checkRemovability(actorName, actors):
+#     for actor in actors:
+#         if actorName == actor[0]:
+#             return True
+#     return False
+def changeActor():
     # right now, just sends the original request json
-
     data = request.get_json()
     filenum = data['scriptNum']
     blocks = data['blocks']
     newActor = data['newActor']
-
+    addOrRemove = data['type']
+    alreadyIn = False
     filename = find_script(filenum)
+    # if not(checkRemovability(newActor, blocks[0]['actors'])):
+    #     return jsonify([])
     if filename is not None:
-        add_name_csv(newActor, 'actors.csv')
+        if addOrRemove == "add":
+            add_name_csv(newActor, 'actors.csv')
         with open("/app/script_data/" + filename, "w") as f:
+
             f.write(filenum + '\n\n')
             # Need to get FULL Script first.
             fullScript = ""
             for i in range(0, len(blocks)):
                 rowBlockText = blocks[i]['text'] # We don't want "     "
-                fullScript+= rowBlockText[1: len(rowBlockText) - 1]
+                fullScript += rowBlockText[1: len(rowBlockText) - 1]
             f.write(fullScript+ '\n\n')
             start = 0
             end = 0
@@ -125,14 +134,29 @@ def addActor():
                 rowBlockText = blocks[i]['text'] # We don't want "     "
                 end += len(rowBlockText) - 2
                 actors = blocks[i]['actors']
-                f.write(str(part_num)+'. '+str(start)+', '+str(end - 1)+', ')
-                for actor_index in range(0, len(actors)):
-                    actor = actors[actor_index]
-                    f.write(actor[0]+'-'+actor[1])
-                    if actor_index != (len(actors) - 1):
-                        f.write(', ')
-                    else:
-                        f.write(', ' + newActor + '-' + '0\n')
+                f.write(str(part_num)+'. '+str(start)+', '+str(end - 1))
+                if len(actors) == 0 and addOrRemove == "remove":
+                    f.write('\n')
+                elif len(actors) == 0 and addOrRemove == "add":
+                    f.write(', ' + newActor + '-' + '0\n')
+                else:
+                    for actor_index in range(0, len(actors)):
+                        actor = actors[actor_index]
+                        if newActor == actor[0]:
+                            alreadyIn = True
+                        if (actor_index == (len(actors) - 1) and addOrRemove == "remove" and newActor == actor[0]):
+                            # To be removed is the last
+                            f.write('\n')
+                        elif not(actor_index != (len(actors) - 1) and addOrRemove == "remove" and newActor == actor[0]):
+                            f.write(', ' + actor[0] + '-' + actor[1])
+                            if actor_index == (len(actors) - 1) and not(addOrRemove == "remove"):
+                                if not(alreadyIn):
+                                    f.write(', ' + newActor + '-' + '0\n')
+                                else:
+                                    f.write('\n')
+                            elif actor_index == (len(actors) - 1):
+                                f.write('\n')
+
                 start = end
             f.close()
     return jsonify(request.json)
@@ -183,7 +207,6 @@ def read_text(filenum):
     return data
 # added, help function for file processing
 
-import csv
 def read_csv(filename):
     '''Helper function used to read actor names from the csv file
     @param str filename: the name of the csv file
@@ -213,4 +236,3 @@ def add_name_csv(actor_name,file_name):
 if __name__ == "__main__":
     # Only for debugging while developing
     app.run(host='0.0.0.0', debug=True, port=os.environ.get('PORT', 80))
-
