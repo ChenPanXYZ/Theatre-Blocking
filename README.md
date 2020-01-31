@@ -26,41 +26,44 @@ To stop/remove container:
 
 `heroku open --app <app-server-name>`
 
-# Write your documentation below
-
-Write your documentation here.
 # Objective statement
 
-* A **Theatre Blocking APP** should allow the **actors** to know their blocking during or ahead of the play so that they don’t need to spend too much time on memorizing their blocking movements before the rehearsal.
+* A **Theatre Blocking APP** should allow the **actors** to know their blocking during and ahead of the play so that they don’t need to spend too much time on memorizing their blocking movements.
 
-* A **Theatre Blocking APP** should allow the **directors** to ensure his / her actors are in the right blockings in real time so that he or she doesn’t need to check blockings of actors manually. Moreover, if **directors** are recruiting more actors, they can add actors to the scripts, or they are not satisfied with a certain actor, they can delete him / her from the script.
+* A **Theatre Blocking APP** should allow the **directors** to ensure his / her actors are in the right blockings in real time so that he or she doesn’t need to check blockings of actors manually. Moreover, if **directors** are recruiting more actors, they can add actors to the scripts, or if they are not satisfied with a certain actor, they can delete him / her from the script.
 
 # Personas
-1. **Julia**, a ballet director. She is a director who is very loyal to the script and very strict with her actors. 
-She is not satisfied about the current stage allocation procedure so that she wants a better system to direct actros in the right position in a more efficient way.
 
-2. **Stephan**, an opera actor. An uprising movie star who is hard-working and ambitious about his career. He loves actoring but memeorizing blocking bothers him a lot, since it distracts him from performing better.
+1. **Julia**, a ballet director. She is a director who is very loyal to the script and very strict with her actors. She is not satisfied about the current stage allocation procedure so that she wants a better system to direct actors in the right position in a more efficient way.
 
-3. **Jack**, an extra. Jack is a student who is doing a part-time job as an extra at Hart House Theatre, overwhelmed in every study. This year is his forth year in the university and the workload becomes quite heavy. Jack doens't want to memorize blockings before his part-time job to save more time for study.
+2. **Stephan**, an opera actor. An uprising movie star who is hard-working and ambitious about his career. He loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
+
+3. **Jack**, an extra. Jack is a student who is doing a part-time job as an extra at Hart House Theatre, overwhelmed in everyday study. This year is his fourth year in the university so that the course workload becomes quite heavy. Jack doens't want to memorize blockings before his part-time job in order to save more time for study.
 
 # User stories
+
 1. **Julia**: As a ballet director, I know how important the actors being in the right positions is, therefore I want to be able to see if every actor is dancing at where he or she should in real time so that I can focus on something more important, such as the details of their actions. 
 
-2. **Stephan**: As an opera actor, I don’t want to memorize blockings, which is a tedious procedure, so that I can concentrate myself on my performance on stage.
+2. **Stephan**: As an opera actor, I don’t want to memorize blockings, which is a tedious procedure, so that I don't need to remind myself of my blocking numbers from time to time and I can concentrate myself on my performance on stage.
 
-3. **Jack**: As a part-time student who is doing extra, I don’t have many words to say on stage, so I hope there is a way that I can see my blockings when I am on stage, so that I can save a lot of time memorizing and have more time studying.
+3. **Jack**: As a part-time student who is doing extra, I don’t have many words to say on stage, so that I hope there is a way that I can see my blockings when I am on stage in order to save a lot of time memorizing my blockings ahead and have more time studying.
 
 # Acceptance criteria
 
-* **Julia** is able to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal, and manage blocks for actors in real time on the director page using *add actor* and *remove actor* buttons. She can allocate actors more easier using our application.
-* **Stephan** is allowed to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal. He can now focus more on the play itself.
-* **Jack** can skim through the blockings of the entire play before the rehearsal by clicking the *Get blocking* button on the *actor page* during the rehearsal, so that he can save more time for his study.
+* **Julia**, as a *director*, is able to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal, and manage blocks for actors in real time on the *director page* using *add actor* and *remove actor* buttons. She can allocate actors in a more easier way using our application.
+
+* **Stephan**, as an *actor*, is allowed to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal. In this way, he can now focus more on the play itself and perform better.
+
+* **Jack**, as an *actor*, can skim through the blockings of the entire play before the rehearsal and see blockings for the actors during the rehearsal directly by clicking the *Get blocking* button on the *actor page*. Now, he can save more time to do more study.
 
 # Enhancements
-1. Allow director to add new actors to the blocking stage. The newly-added actor has a position number of 0 by default, indicating he is not at stage. The director can upload his / her position using the existing script save feature.
-2. Allow director to delete existing actors from the blocking stage. If the actor provided cannot be found in any of the script, the action won't be proceed. 
+
+1. Allow director to add new actors to the blocking stages by entering actors' names in a textbox with id **actorName** and clicking the **Add Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and a certian script is shown on the page. The newly-added actor has a position number of 0 by default, indicating he is not at stage on the script shown. The director can upload his / her position on that script using the existing script save feature.
+
+2. Allow director to remove existing actors from the blocking stage of a certain script by entering actors' names in a textbox with id **actorName** and clicking the **Remove Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and that script is shown on the page. If the actor provided cannot be found in any of the script, the action won't be proceed. 
 
 # JSON file
+
 1. Example of **script_get_data.json**
 ```
 [ 
@@ -140,6 +143,7 @@ She is not satisfied about the current stage allocation procedure so that she wa
 ]
 ```
 2. Example of **script_post_data.json**
+```
 { 
     "scriptNum":"3",
     "blocks":[ 
@@ -197,10 +201,11 @@ She is not satisfied about the current stage allocation procedure so that she wa
        }
     ]
  }
+```
 * Entry Explanation
 ```
 { 
-    "scriptNum <Script number entry>":"3 <Script number value>",
+    "scriptNum <script number entry>":"3 <script number value>",
     "blocks <block entry>":[ 
        { 
           "part <part entry>":1 <part number>,

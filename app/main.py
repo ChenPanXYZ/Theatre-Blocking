@@ -78,7 +78,7 @@ def addBlocking():
             end = 0
             for i in range(0, len(blocks)):
                 part_num = blocks[i]['part']
-                rowBlockText = blocks[i]['text'] # We don't want "     "
+                rowBlockText = blocks[i]['text'] 
                 end += len(rowBlockText) - 2
                 actors = blocks[i]['actors']
                 f.write(str(part_num)+'. '+str(start)+', '+str(end - 1)+', ')
@@ -124,14 +124,14 @@ def changeActor():
             # Need to get FULL Script first.
             fullScript = ""
             for i in range(0, len(blocks)):
-                rowBlockText = blocks[i]['text'] # We don't want "     "
+                rowBlockText = blocks[i]['text']
                 fullScript += rowBlockText[1: len(rowBlockText) - 1]
             f.write(fullScript+ '\n\n')
             start = 0
             end = 0
             for i in range(0, len(blocks)):
                 part_num = blocks[i]['part']
-                rowBlockText = blocks[i]['text'] # We don't want "     "
+                rowBlockText = blocks[i]['text'] 
                 end += len(rowBlockText) - 2
                 actors = blocks[i]['actors']
                 f.write(str(part_num)+'. '+str(start)+', '+str(end - 1))
@@ -163,7 +163,7 @@ def changeActor():
 
 
 
-# added, helper function for file processing
+# Followings are added helper functions for file processing
 def find_script(filenum):
     ''' Helper function used to get file names of the text files with the file number
     @param str filenum: a filenum indicating the script number
@@ -205,10 +205,10 @@ def read_text(filenum):
                 line = script.readline()
   
     return data
-# added, help function for file processing
+# Added following functions for file processing
 
 def read_csv(filename):
-    '''Helper function used to read actor names from the csv file
+    ''' Helper function used to read actor names from the csv file
     @param str filename: the name of the csv file
     '''
 
@@ -220,6 +220,10 @@ def read_csv(filename):
     return actor
     
 def add_name_csv(actor_name,file_name):
+    ''' Helper function used to add actor names to the csv file
+    @param str actor_name: the name of an actor to add
+    @param str file_name: the name of the csv file
+    '''
     with open("/app/" + file_name,"r+") as csv_file:
         exist = False
         for line in csv_file:
