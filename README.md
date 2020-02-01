@@ -45,17 +45,47 @@ Inefficiency of checking the positions of actors.
 Inefficiency of modifying the positions of actors.
 Unable to focus on something more important, such as the details of actors' actions.
 
-2. **Stephan**, an opera actor. An uprising movie star who is hard-working and ambitious about his career. He loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
+## **Stephan**
+#### Bio
+Stephan is an opera actor. He is an uprising movie star who is hard-working and ambitious about his career. Stephan loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
+#### Goal
+Focus on and improve performing skills.
+Become more popolar and earn more money.
+#### Frustration
+Memorizing blockings takes too much time.
+Finding blockings from scripts is sometimes cumbersome.
 
-3. **Jack**, an extra. Jack is a student who is doing a part-time job as an extra at Hart House Theatre, overwhelmed in everyday study. This year is his fourth year in the university so that the course workload becomes quite heavy. Jack doens't want to memorize blockings before his part-time job in order to save more time for study.
+## **Mark**
+#### Bio
+Mark is a lighting director. He loves this job. He always writes the blocking infomation of different parts of the scripts on paper so that when he adjust the light, he can see the position of every actor easily.
+#### Goal
+Organize the stage lighting more efficiently.
+Spend less time on making blocking information available during the rehearsal.
+#### Frustration
+Writing blockings on the paper takes much time.
+Need to be very careful to avoid writing the wrong position.
+
+## **Jack**
+#### Bio
+Jack is a student who is doing a part-time job as an extra at Hart House Theatre, overwhelmed in everyday study. This year is his fourth year in the university so that the course workload becomes quite heavy.
+#### Goal
+Earn money as an extra.
+Balance between the roles of an extra and a fourth-year student better.
+Improve the efficiency of checking his positions.
+Avoid reading the full script every time since all he needs to do is to move to the right positions during the rehearsal.
+#### Frustration
+Need to spend a lot of time on memorizing the positions before the rehearsal.
+Reading the full script, where he is just an extra, takes too much time.
 
 # User stories
 
-1. **Julia**: As a ballet director, I know how important the actors being in the right positions is, therefore I want to be able to see if every actor is dancing at where he or she should in real time so that I can focus on something more important, such as the details of their actions. 
+1. **Julia**: As a ballet director, I want to be able to see if every actor is dancing at where he or she should in real time so that I can focus on something more important, such as the details of their actions. 
 
 2. **Stephan**: As an opera actor, I don’t want to memorize blockings, which is a tedious procedure, so that I don't need to remind myself of my blocking numbers from time to time and I can concentrate myself on my performance on stage.
 
-3. **Jack**: As a part-time student who is doing extra, I don’t have many words to say on stage, so that I hope there is a way that I can see my blockings when I am on stage in order to save a lot of time memorizing my blockings ahead and have more time studying.
+3. **Mark**: As a lighting actor, I want to see the positions of actors among different parts of the scripts so that I can better adjust the lighting for them.
+
+4. **Jack**: As a part-time student who is doing extra, I don’t have many words to say on stage, so that I hope there is a way that I can see my blockings when I am on stage in order to save a lot of time memorizing my blockings ahead and have more time for studying.
 
 # Acceptance criteria
 
