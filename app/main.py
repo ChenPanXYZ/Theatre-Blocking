@@ -57,7 +57,6 @@ def script(script_id):
 # of the script.
 @app.route('/script', methods=['POST'])
 def addBlocking():
-    # right now, just sends the original request json
 
     data = request.get_json()
     filenum = data['scriptNum']
@@ -99,13 +98,8 @@ def addBlocking():
 # Other systems might use different http verbs like PUT or PATCH to replace only part
 # of the script.
 @app.route('/actor', methods=['POST'])
-# def checkRemovability(actorName, actors):
-#     for actor in actors:
-#         if actorName == actor[0]:
-#             return True
-#     return False
 def changeActor():
-    # right now, just sends the original request json
+    # change actor for a script, add or remove.
     data = request.get_json()
     filenum = data['scriptNum']
     blocks = data['blocks']
@@ -113,8 +107,6 @@ def changeActor():
     addOrRemove = data['type']
     alreadyIn = False
     filename = find_script(filenum)
-    # if not(checkRemovability(newActor, blocks[0]['actors'])):
-    #     return jsonify([])
     if filename is not None:
         if addOrRemove == "add":
             add_name_csv(newActor, 'actors.csv')

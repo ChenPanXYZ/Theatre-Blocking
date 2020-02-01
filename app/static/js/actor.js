@@ -46,16 +46,19 @@ function getExampleBlock() {
 
 /* Write the code to get the blocking for a particular script and actor */
 function getBlocking() {
-	// Remove any existing blocks
+	// Check if the users provide a valid script number.
 	if(document.getElementById("scriptNumText").value === "") {
 		alert("Please input a valid Script Number!")
 		return
 	}
 
+	// Check if the users provide a valid actor name.
 	if(document.getElementById("actorText").value === "") {
 		alert("Please input a valid Actor Name!")
 		return
 	}
+
+
 	removeAllBlocks();
 
 	// Get the script and actor numbers from the text box.

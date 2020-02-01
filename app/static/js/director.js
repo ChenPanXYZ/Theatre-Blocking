@@ -1,6 +1,8 @@
 /* director.js - Theatre blocking JavaScript */
 "use strict";
 console.log('director.js') // log to the JavaScript console.
+
+// At first, no script is on the screen, so we set blockShown false
 var blockShown = false;
 /* UI functions below - DO NOT change them */
 
@@ -80,6 +82,7 @@ function addBlockToScreen(scriptText, startChar, endChar, actors, positions) {
 // You will have to edit these functions.
 
 function getBlocking() {
+	// Check if the users provide a valid script number.
 	if(document.getElementById("scriptNumText").value === "") {
 		alert("Please input a valid Script Number!")
 		return
@@ -133,6 +136,7 @@ function changeScript() {
 	// You can make a POST call with all of the 
 	// blocking data to save it on the server
 
+	// If the user tries to add an actor before he / she gets the script on screen, we will give the user an alert.
 	if(blockShown != true) {
 		alert("Please input a Get the Script Blocking first!")
 		return
@@ -195,13 +199,16 @@ function changeActor(option) {
 	// You can make a POST call with all of the 
 	// blocking data to save it on the server
 
+	// Check if the users provide a valid actor name.
 	if(document.getElementById("actorName").value === "") {
 		alert("Please input a valid Actor Name!")
 		return
 	}
 
+
+	// If the user tries to add an actor before he / she gets the script on screen, we will give the user an alert.
 	if (blockShown != true) {
-		alert("Please Get Script Blocking")
+		alert("Please Get Script Blocking First!")
 		return
 	}
 	const url = '/actor';

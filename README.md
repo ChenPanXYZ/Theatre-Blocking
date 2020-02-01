@@ -50,11 +50,13 @@ To stop/remove container:
 
 # Acceptance criteria
 
-* **Julia**, as a *director*, is able to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal, and manage blocks for actors in real time on the *director page* using *add actor* and *remove actor* buttons. She can allocate actors in a more easier way using our application.
+* **Actor** should be able to check his or her **position** in different **parts** of the **scripts** where he or she stars. 
 
-* **Stephan**, as an *actor*, is allowed to see blockings for the actors by clicking the *Get blocking* button on the *actor page* during the rehearsal. In this way, he can now focus more on the play itself and perform better.
+* **Director** should be able to see the **positions** of every actor in all parts of different **scripts**.
 
-* **Jack**, as an *actor*, can skim through the blockings of the entire play before the rehearsal and see blockings for the actors during the rehearsal directly by clicking the *Get blocking* button on the *actor page*. Now, he can save more time to do more study.
+* **Only** directors are able to modify the *positions* of the actors in different parts of different script.
+
+* **Only** directors have the permission to add or remove actors from a script.
 
 # Enhancements
 
