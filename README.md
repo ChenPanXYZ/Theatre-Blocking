@@ -101,7 +101,7 @@ Reading the full script, as he is just an extra, takes too much time.
 
 # Enhancements
 
-1. **Recruiting more actors**: it allows director to add new actors to the blocking stages by entering actors' names in a textbox with id **actorName** and clicking the **Add Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and a certian script is shown on the page. The newly-added actor has a position number of 0 by default, indicating he is not at stage on the script shown. The director can upload his / her position on that script using the existing script save feature.
+1. **Recruiting more actors**: it allows director to add new actors to the blocking stages by entering actors' names in a textbox with id **actorName** and clicking the **Add Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and a certian script is shown on the page. The newly-added actor has a position number of 0 by default, indicating he is not at stage on the script shown. The director can update his / her position on that script using the existing script save feature. Note that if the actor has never starred in any script before, he / she will be added to actors.csv.
 
 2. **Removing actors**: it allow director to remove existing actors from the blocking stage of a certain script by entering actors' names in a textbox with id **actorName** and clicking the **Remove Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and after the script is shown on the page. If the actor provided cannot be found in any of the script, the action won't be proceed. 
 
