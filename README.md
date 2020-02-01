@@ -34,7 +34,16 @@ To stop/remove container:
 
 # Personas
 
-1. **Julia**, a ballet director. She is a director who is very loyal to the script and very strict with her actors. She is not satisfied about the current stage allocation procedure so that she wants a better system to direct actors in the right position in a more efficient way.
+## **Julia**
+#### Bio
+Julia is a ballet director. She is very loyal to the script and very strict with her actors. She spends much time on checking and modifying the positions of her actors.
+#### Goal
+Increase the efficiency of rehearsal.
+Increase the quality of the ballet she directs.
+#### Frustration
+Inefficiency of checking the positions of actors.
+Inefficiency of modifying the positions of actors.
+Unable to focus on something more important, such as the details of actors' actions.
 
 2. **Stephan**, an opera actor. An uprising movie star who is hard-working and ambitious about his career. He loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
 
