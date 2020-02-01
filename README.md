@@ -97,13 +97,13 @@ Reading the full script, where he is just an extra, takes too much time.
 
 * **Only** directors have the permission to add or remove actors from a script.
 
-* **Both** actors and directors should receive a clear instruction when they input an invalid input.
+* **Both** actors and directors should receive a clear instruction if they input an invalid input.
 
 # Enhancements
 
-1. Allow director to add new actors to the blocking stages by entering actors' names in a textbox with id **actorName** and clicking the **Add Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and a certian script is shown on the page. The newly-added actor has a position number of 0 by default, indicating he is not at stage on the script shown. The director can upload his / her position on that script using the existing script save feature.
+1. **Recruiting more actors**: it allows director to add new actors to the blocking stages by entering actors' names in a textbox with id **actorName** and clicking the **Add Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and a certian script is shown on the page. The newly-added actor has a position number of 0 by default, indicating he is not at stage on the script shown. The director can upload his / her position on that script using the existing script save feature.
 
-2. Allow director to remove existing actors from the blocking stage of a certain script by entering actors' names in a textbox with id **actorName** and clicking the **Remove Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and that script is shown on the page. If the actor provided cannot be found in any of the script, the action won't be proceed. 
+2. **Removing actors**: it allow director to remove existing actors from the blocking stage of a certain script by entering actors' names in a textbox with id **actorName** and clicking the **Remove Actor** button on the **director page**. The director can only do so after clicking **get script blockings** button and after the script is shown on the page. If the actor provided cannot be found in any of the script, the action won't be proceed. 
 
 # JSON file
 
