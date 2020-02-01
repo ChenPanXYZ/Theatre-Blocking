@@ -146,7 +146,8 @@ function changeScript() {
 
 	for (var i = 0; i < elements.length; i++) {
 		let element = elements[i]
-		if (parseInt(element.value) < 0 || parseInt(element.value) > 8) {
+		var numbers = /^[0-9]+$/;
+		if ( !(element.value.match(numbers)) || parseInt(element.value) < 0 || parseInt(element.value) > 8) {
 			alert("Only 0 - 8 is accepted!")
 			return
 		}

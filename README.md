@@ -45,9 +45,9 @@ Inefficiency of checking the positions of actors.
 Inefficiency of modifying the positions of actors.
 Unable to focus on something more important, such as the details of actors' actions.
 
-## **Stephan**
+## *Stephen**
 #### Bio
-Stephan is an opera actor. He is an uprising movie star who is hard-working and ambitious about his career. Stephan loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
+Stephen is an opera actor. He is an uprising movie star who is hard-working and ambitious about his career. Stephen loves actoring but memorizing blocking bothers him a lot, since it always distracts him from performing better.
 #### Goal
 Focus on and improve performing skills.
 Become more popolar and earn more money.
@@ -75,13 +75,13 @@ Improve the efficiency of checking his positions.
 Avoid reading the full script every time since all he needs to do is to move to the right positions during the rehearsal.
 #### Frustration
 Need to spend a lot of time on memorizing the positions before the rehearsal.
-Reading the full script, where he is just an extra, takes too much time.
+Reading the full script, as he is just an extra, takes too much time.
 
 # User stories
 
 1. **Julia**: As a ballet director, I want to be able to see if every actor is dancing at where he or she should in real time so that I can focus on something more important, such as the details of their actions. 
 
-2. **Stephan**: As an opera actor, I don’t want to memorize blockings, which is a tedious procedure, so that I don't need to remind myself of my blocking numbers from time to time and I can concentrate myself on my performance on stage.
+2. **Stephen**: As an opera actor, I don’t want to memorize blockings, which is a tedious procedure, so that I don't need to remind myself of my blocking numbers from time to time and I can concentrate myself on my performance on stage.
 
 3. **Mark**: As a lighting actor, I want to see the positions of actors among different parts of the scripts so that I can better adjust the lighting for them.
 
@@ -93,7 +93,7 @@ Reading the full script, where he is just an extra, takes too much time.
 
 * **Director** should be able to see the **positions** of every actor in all parts of different **scripts**.
 
-* **Only** directors are able to modify the *positions* of the actors in different parts of different script.
+* **Only** directors are able to modify the **positions** of the actors in different parts of different script.
 
 * **Only** directors have the permission to add or remove actors from a script.
 
