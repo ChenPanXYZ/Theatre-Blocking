@@ -1,0 +1,6 @@
+gradubg summary
+
+Objective statement: too much details. should be a high level statement. -5
+Json: no json file, though explained them in readme -4
+
+grade: 91
